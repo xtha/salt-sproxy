@@ -22,3 +22,4 @@ RUN sh -x -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.lo
 COPY Taskfile.yml ~/
 RUN task -a
 
+COPY --from=catchzeng/dingtalk:/usr/local/bin/dingtalk /usr/local/bin/dingtalk
