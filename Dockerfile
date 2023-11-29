@@ -17,5 +17,5 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 # add task command
-RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin \
+RUN sh -x -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin \
     && echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
