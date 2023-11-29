@@ -8,7 +8,7 @@ COPY ./ /var/cache/salt-sproxy/
 COPY ./master /etc/salt/master
 
 RUN apt-get update \
- && apt-get install -y python3-zmq gcc direnv \
+ && apt-get install -y python3-zmq gcc direnv curl \
  && echo 'eval "$(direnv hook bash)"' >> ~/.bashrc \
  && pip --no-cache-dir install salt==$SALT_VERSION \
  && pip --no-cache-dir install /var/cache/salt-sproxy/ \
