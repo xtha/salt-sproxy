@@ -15,6 +15,16 @@ on:
       - ".*"
   # Run tests for any PRs.
   pull_request:
+  # Allows you to run this workflow manually from the Actions tab
+  # 可以手动触发
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: "Log level"
+        required: true
+        default: "warning"
+      tags:
+        description: "Test scenario tags"
 
 env:
   # Use docker.io for Docker Hub if empty
