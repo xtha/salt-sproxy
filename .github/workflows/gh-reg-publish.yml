@@ -115,7 +115,8 @@ jobs:
 
       - name: dingtalk notify
         uses: leafney/dingtalk-action@v1
-        if: always()
+        #if: always()
+        if: false
         env:
           DINGTALK_ACCESS_TOKEN: ${{ secrets.DINGTALK_ACCESS_TOKEN }}
         with:
