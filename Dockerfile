@@ -19,7 +19,5 @@ RUN apt-get update \
 # add task command
 RUN sh -x -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin \
     && echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
-COPY Taskfile.yml ~/
-RUN task -a
-
+COPY ./Taskfile.yml ~/
 COPY --from=catchzeng/dingtalk /usr/local/bin/dingtalk /usr/local/bin/dingtalk
