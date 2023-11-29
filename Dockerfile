@@ -14,6 +14,8 @@ RUN apt-get update \
  && pip --no-cache-dir install /var/cache/salt-sproxy/ \
  && rm -rf /var/cache/salt-sproxy/ \
  && apt-get autoremove -y \
- && sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin \
- && echo 'export PATH=$PATH:~/.local/bin' \
  && rm -rf /var/lib/apt/lists/*
+
+# add task command
+RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin \
+    && echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
