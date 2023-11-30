@@ -132,16 +132,21 @@ tasks:
   clean-tmp:
     cmds:
     - rm -rf /tmp/*
+
+  arkade-install:
+    cmds:
+    - task: arkade-install-utils
+    - task: arkade-install-kubectl
+    - task: arkade-install-krew
+    - task: arkade-install-helmfile
     
   build:
     cmds:
     - task: oh-my-bash
     - task: bashrc-complete-alias
     - task: install-dingtalk
-    - task: arkade-install-utils
-    - task: apt-install-kubectl
-    - task: apt-install-krew
-    - task: apt-install-helmfile
+    - task: apt-install
+    - task: arkade-install
     - task: brew-install
     - task: upx-compress
     - chmod +x /usr/local/bin/* ~/.arkade/bin/*
