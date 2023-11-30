@@ -4,7 +4,7 @@ tasks:
   install-apt-fast:
     cmds:
     - |
-      apt-get update && apt-get install -y gnupg
+      apt-get update && apt-get install -y sudo gnupg
       /bin/bash -c "$(curl -sL https://git.io/vokNn)"
       echo debconf apt-fast/maxdownloads string 16 | debconf-set-selections
       echo debconf apt-fast/dlflag boolean true | debconf-set-selections
