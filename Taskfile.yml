@@ -21,6 +21,7 @@ tasks:
       unzip -d /usr/local/bin dingtalk-linux-amd64.zip
       rm -f dingtalk-linux-amd64.zip
       chmod +x /usr/local/bin/dingtalk
+      upx /usr/local/bin/dingtalk
 
   build:
     cmds:
