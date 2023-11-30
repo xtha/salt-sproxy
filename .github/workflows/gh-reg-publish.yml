@@ -80,12 +80,12 @@ jobs:
           prefix=
           suffix=
         tags:
-          type={{date 'YYYYMMDD-HHmmss' tz='Asia/Shanghai'}}
-          type=raw,enable=true,priority=200,prefix=,suffix=,value=
+          type=raw,enabled=true,value={{date 'YYYYMMDD-HHmmss' tz='Asia/Shanghai'}}
+          #type=raw,enable=true,priority=200,prefix=,suffix=,value=
           # set latest tag for master branch
           #type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'master') }}
           # set latest tag for default branch
-          type=raw,value=latest,enable={{is_default_branch}}
+          #type=raw,value=latest,enable={{is_default_branch}}
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
