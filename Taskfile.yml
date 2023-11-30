@@ -65,15 +65,12 @@ tasks:
     - install-arkade
     - bashrc-kubectl-alias
     cmds:
-    - arkade get kubectl@v1.23.3 kustomize kubecm
-    - arkade get krew
+    - arkade get kubectl@v1.23.3 kustomize kubecm krew
     - krew install ice df-pv ktop
     
   arkade-install-helmfile:
     deps:
-    - install-arkade
     - arkade-install-kubectl
-    - arkade-install-krew
     cmds:
     - arkade get helm helmfile popeye stern flux kail
     - helm plugin install https://github.com/databus23/helm-diff
@@ -132,12 +129,6 @@ tasks:
   clean-tmp:
     cmds:
     - rm -rf /tmp/*
-
-  arkade-install:
-    cmds:
-    - task: arkade-install-utils
-    - task: arkade-install-kubectl
-    - task: arkade-install-helmfile
     
   build:
     cmds:
@@ -145,7 +136,7 @@ tasks:
     - task: bashrc-complete-alias
     - task: install-dingtalk
     - task: apt-install
-    - task: arkade-install
+    - task: arkade-install-helmfile
     - task: brew-install
     #- task: apt-install-fpm
     - task: upx-compress
