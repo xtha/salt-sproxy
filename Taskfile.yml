@@ -1,7 +1,24 @@
 version: '3'
 
 tasks:
+  install-apt-fast:
+    cmds:
+    - |
+      mkdir -p /etc/apt/keyrings
+      curl -fsSL https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xA2166B8DE8BDC3367D1901C11EE2FF37CA8DA16B | gpg --dearmor -o /etc/apt/keyrings/apt-fast.gpg
+      apt-get install -y apt-fast
+      echo debconf apt-fast/maxdownloads string 16 | debconf-set-selections
+      echo debconf apt-fast/dlflag boolean true | debconf-set-selections
+      echo debconf apt-fast/aptmanager string apt-get | debconf-set-selections
+      echo 'MIRRORS=( 'http://deb.debian.org/debian','http://ftp.debian.org/debian, http://ftp2.de.debian.org/debian, http://ftp.de.debian.org/debian, ftp://ftp.uni-kl.de/debian' )' >> /etc/apt-fast.conf
+  install-utils:
+    deps:
+    - install-apt-fast
+    cmds:
+    - apt-fast install -y direnv curl wget aria2 axel file tree ncdu neofetch htop dstat iotop unzip git
   oh-my-bash:
+    deps:
+    - install-utils
     cmds:
     - bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)" --unattended
     silent: false
@@ -14,6 +31,8 @@ tasks:
       mv upx-4.2.1-amd64_linux/upx /usr/local/bin/ && chmod +x /usr/local/bin/upx
       rm -rf upx*
   install-dingtalk:
+    deps:
+    - install-upx
     dir: /tmp
     cmds:
     - |
@@ -26,7 +45,6 @@ tasks:
   build:
     cmds:
     - task: oh-my-bash
-    - task: install-upx
     - task: install-dingtalk
 
   default:
