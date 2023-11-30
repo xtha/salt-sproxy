@@ -62,6 +62,7 @@ tasks:
   arkade-install-kubectl:
     deps:
     - install-arkade
+    - bashrc-kubectl-alias
     cmds:
     - arkade install kubectl@v1.23.3 kustomize kubecm
     
@@ -89,11 +90,11 @@ tasks:
     deps:
     - install-apt-fast
     cmds:
-    - apt-fast install -y fpm dropbear
+    - apt-fast install -y fpm dropbear neovim
     
   #github-install:
   # cmds:
-  #  - starship, dust, btop, nfpm, ctop, lazydocker
+  #  - dust, btop, ctop, nfpm, lazydocker
   
   github-install-kubie:
     cmds:
@@ -117,6 +118,11 @@ tasks:
     - wget -O ~/.complete_alias https://raw.githubusercontent.com/cykerway/complete-alias/master/complete_alias
     - echo "#--- complete_alias ---#" >> ~/.bashrc
     - echo 'export COMPAL_AUTO_UNMASK=1' >> ~/.bashrc
+
+  bashrc-kubectl-alias:
+    cmds:
+    - wget -O ~/.kubectl_aliases https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases
+    - echo '[ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases' >> ~/.bashrc
     
   upx-compress:
     cmds:
