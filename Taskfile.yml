@@ -78,7 +78,7 @@ tasks:
       ./"${KREW}" install krew
       )
     - echo 'export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"' >> ~/.bashrc
-    - /usr/local/bin/kubectl krew install ice df-pv ktop
+    #- /usr/local/bin/kubectl krew install ice df-pv ktop
     
   arkade-install-helmfile:
     deps:
