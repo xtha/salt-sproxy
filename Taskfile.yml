@@ -49,6 +49,7 @@ tasks:
     - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     
   install-arkade:
+    run: once
     cmds:
     - curl -sLS https://get.arkade.dev | sh
     
