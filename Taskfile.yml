@@ -95,10 +95,12 @@ tasks:
     cmds:
     - apt-fast install -y dropbear neovim exa
     
-  #github-install:
-  # cmds:
-  #  - dust, btop, ctop, lazydocker
-  
+  github-install:
+    cmds:
+    #- dust, btop, ctop, lazydocker
+    - task: github-install-xh
+    - task: github-install-starship
+    
   github-install-kubie:
     cmds:
     - wget -O /usr/local/bin/kubie https://github.com/sbstp/kubie/releases/download/v0.22.0/kubie-linux-amd64
@@ -153,6 +155,7 @@ tasks:
     - task: apt-install
     - task: arkade-install-helmfile
     - task: brew-install
+    - task: github-install
     #- task: apt-install-fpm
     - task: upx-compress
     - chmod +x /usr/local/bin/* ~/.arkade/bin/*
