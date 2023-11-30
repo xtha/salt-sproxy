@@ -56,7 +56,7 @@ tasks:
     deps:
     - install-arkade
     cmds:
-    - arkade install fzf gh jq sops lazygit mc mkcert packer terraform 
+    - arkade install gh jq sops lazygit mc mkcert packer terraform 
     - arkade install gomplate hadolint k9s nerdctl cr dive crane 
 
   arkade-install-kubectl:
@@ -90,7 +90,7 @@ tasks:
     deps:
     - install-apt-fast
     cmds:
-    - apt-fast install -y fpm dropbear neovim
+    - apt-fast install -y fpm dropbear neovim exa
     
   #github-install:
   # cmds:
@@ -105,11 +105,11 @@ tasks:
     - curl -sS https://starship.rs/install.sh | sh
     - echo 'eval "$(starship init bash)"' >> ~/.bashrc
     
-  brew-insall-asdf:
+  brew-insall:
     deps:
     - install-linuxbrew
     cmds:
-    - brew install asdf
+    - brew install asdf age dust fzf autojump zoxide
     - echo '. "$HOME/.asdf/asdf.sh" >> ~/.bashrc
     - echo '. "$HOME/.asdf/completions/asdf.bash"' >> ~/.bashrc
 
@@ -142,6 +142,7 @@ tasks:
     - task: apt-install-kubectl
     - task: apt-install-krew
     - task: apt-install-helmfile
+    - task: brew-install
     - task: upx-compress
     - chmod +x /usr/local/bin/* ~/.arkade/bin/*
     - task: clean-tmp
