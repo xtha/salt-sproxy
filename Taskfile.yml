@@ -56,15 +56,15 @@ tasks:
     deps:
     - install-arkade
     cmds:
-    - arkade install gh jq sops lazygit mc mkcert packer terraform 
-    - arkade install gomplate hadolint k9s nerdctl cr dive crane 
+    - arkade get fzf gh jq sops lazygit mc mkcert packer terraform 
+    - arkade get gomplate hadolint k9s nerdctl cr dive crane 
 
   arkade-install-kubectl:
     deps:
     - install-arkade
     - bashrc-kubectl-alias
     cmds:
-    - arkade install kubectl@v1.23.3 kustomize kubecm
+    - arkade get kubectl@v1.23.3 kustomize kubecm
     
   arkade-install-helmfile:
     deps:
@@ -72,7 +72,7 @@ tasks:
     - arkade-install-kubectl
     - arkade-install-krew
     cmds:
-    - arkade install helm helmfile popeye stern flux kail
+    - arkade get helm helmfile popeye stern flux kail
     - helm plugin install https://github.com/databus23/helm-diff
     - helm plugin install https://github.com/chartmuseum/helm-push
     - helm plugin install https://github.com/nikhilsbhat/helm-images
@@ -83,7 +83,7 @@ tasks:
     - install-arkade
     - arkade-install-kubectl
     cmds:
-    - arkade install krew
+    - arkade get krew
     - krew install ice df-pv ktop
     
   apt-install:
