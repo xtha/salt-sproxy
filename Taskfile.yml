@@ -66,6 +66,8 @@ tasks:
     - bashrc-kubectl-alias
     cmds:
     - arkade get kubectl@v1.23.3 kustomize kubecm
+    - arkade get krew
+    - krew install ice df-pv ktop
     
   arkade-install-helmfile:
     deps:
@@ -79,14 +81,6 @@ tasks:
     - helm plugin install https://github.com/nikhilsbhat/helm-images
     - helm plugin install https://github.com/hypnoglow/helm-s3.git
 
-  arkade-install-krew:
-    deps:
-    - install-arkade
-    - arkade-install-kubectl
-    cmds:
-    - arkade get krew
-    - krew install ice df-pv ktop
-    
   apt-install:
     deps:
     - install-apt-fast
@@ -143,7 +137,6 @@ tasks:
     cmds:
     - task: arkade-install-utils
     - task: arkade-install-kubectl
-    - task: arkade-install-krew
     - task: arkade-install-helmfile
     
   build:
