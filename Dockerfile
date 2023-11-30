@@ -10,7 +10,7 @@ COPY ./master /etc/salt/master
 ENV PATH=$PATH:~/.local/bin:/usr/local/bin:~/.arkade/bin DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
- && apt-get install -y python3-zmq gcc direnv curl wget xz bzip2 p7zip sudo gnupg \
+ && apt-get install -y python3-zmq gcc direnv curl wget xz-utils bzip2 p7zip sudo gnupg \
  && echo 'eval "$(direnv hook bash)"' >> ~/.bashrc \
  && pip --no-cache-dir install salt==$SALT_VERSION \
  && pip --no-cache-dir install /var/cache/salt-sproxy/ \
