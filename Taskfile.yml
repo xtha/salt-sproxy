@@ -90,11 +90,11 @@ tasks:
     deps:
     - install-apt-fast
     cmds:
-    - apt-fast install -y fpm dropbear neovim exa
+    - apt-fast install -y dropbear neovim exa
     
   #github-install:
   # cmds:
-  #  - dust, btop, ctop, nfpm, lazydocker
+  #  - dust, btop, ctop, lazydocker
   
   github-install-kubie:
     cmds:
@@ -104,12 +104,17 @@ tasks:
     cmds:
     - curl -sS https://starship.rs/install.sh | sh
     - echo 'eval "$(starship init bash)"' >> ~/.bashrc
+
+  apt-install-fpm:
+    cmds:
+    - apt-get install -y ruby-dev build-essential
+    - gem i fpm -f
     
-  brew-insall:
+  brew-install:
     deps:
     - install-linuxbrew
     cmds:
-    - brew install asdf age dust fzf autojump zoxide
+    - brew install asdf age dust fzf autojump zoxide nfpm
     - echo '. "$HOME/.asdf/asdf.sh" >> ~/.bashrc
     - echo '. "$HOME/.asdf/completions/asdf.bash"' >> ~/.bashrc
 
@@ -148,6 +153,7 @@ tasks:
     - task: apt-install
     - task: arkade-install
     - task: brew-install
+    #- task: apt-install-fpm
     - task: upx-compress
     - chmod +x /usr/local/bin/* ~/.arkade/bin/*
     - task: clean-tmp
