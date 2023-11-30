@@ -26,4 +26,4 @@ RUN wget https://github.com/go-task/task/releases/download/v3.32.0/task_linux_am
     && echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
     
 COPY ./Taskfile.yml /root/Taskfile.yml
-RUN /usr/.local/bin/task
+RUN task
