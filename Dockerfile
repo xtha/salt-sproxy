@@ -22,4 +22,5 @@ RUN sh -x -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.lo
     
 COPY ./Taskfile.yml /root/Taskfile.yml
 WORKDIR /root
-RUN task build
+ENV PATH=$PATH:/usr/.local/bin:/usr/local/bin:~/.arkade/bin
+RUN /usr/.local/bin/task
