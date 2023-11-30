@@ -43,7 +43,11 @@ tasks:
       rm -f dingtalk-linux-amd64.zip
       chmod +x /usr/local/bin/dingtalk
       upx /usr/local/bin/dingtalk
-      
+
+  install-linuxbrew:
+    cmds:
+    - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    
   install-arkade:
     cmds:
     - curl -sLS https://get.arkade.dev | sh
@@ -90,7 +94,24 @@ tasks:
   #github-install:
   # cmds:
   #  - starship, dust, btop, nfpm, ctop, lazydocker
+  
+  github-install-kubie:
+    cmds:
+    - wget -O /usr/local/bin/kubie https://github.com/sbstp/kubie/releases/download/v0.22.0/kubie-linux-amd64
 
+  github-install-starship:
+    cmds:
+    - curl -sS https://starship.rs/install.sh | sh
+    - echo 'eval "$(starship init bash)"' >> ~/.bashrc
+    
+  brew-insall-asdf:
+    deps:
+    - install-linuxbrew
+    cmds:
+    - brew install asdf
+    - echo '. "$HOME/.asdf/asdf.sh" >> ~/.bashrc
+    - echo '. "$HOME/.asdf/completions/asdf.bash"' >> ~/.bashrc
+    
   upx-compress:
     cmds:
     - upx /usr/local/bin/*
