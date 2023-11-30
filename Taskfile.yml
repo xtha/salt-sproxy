@@ -10,17 +10,20 @@ tasks:
       echo debconf apt-fast/dlflag boolean true | debconf-set-selections
       echo debconf apt-fast/aptmanager string apt-get | debconf-set-selections
       echo 'MIRRORS=( 'http://deb.debian.org/debian','http://ftp.debian.org/debian, http://ftp2.de.debian.org/debian, http://ftp.de.debian.org/debian, ftp://ftp.uni-kl.de/debian' )' >> /etc/apt-fast.conf
+  
   install-utils:
     deps:
     - install-apt-fast
     cmds:
     - apt-fast install -y direnv curl wget aria2 axel file tree ncdu neofetch htop dstat iotop unzip git
+    
   oh-my-bash:
     deps:
     - install-utils
     cmds:
     - bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)" --unattended
     silent: false
+    
   install-upx:
     dir: /tmp
     cmds:
@@ -28,7 +31,7 @@ tasks:
       wget https://github.com/upx/upx/releases/download/v4.2.1/upx-4.2.1-amd64_linux.tar.xz
       tar xf upx-4.2.1-amd64_linux.tar.xz
       mv upx-4.2.1-amd64_linux/upx /usr/local/bin/ && chmod +x /usr/local/bin/upx
-      rm -rf upx*
+      
   install-dingtalk:
     deps:
     - install-upx
@@ -40,11 +43,46 @@ tasks:
       rm -f dingtalk-linux-amd64.zip
       chmod +x /usr/local/bin/dingtalk
       upx /usr/local/bin/dingtalk
+      
+  install-arkade:
+    cmds:
+    - curl -sLS https://get.arkade.dev | sh
+  arkade-install:
+    deps:
+    - install-arkade
+    cmds:
+    - arkade install fzf gh jq sops lazygit mc mkcert packer terraform 
+    - arkade install gomplate hadolint k9s nerdctl cr dive crane 
+    - arkade install helm helmfile popeye sternflux kail krew kubecm kustomize
+    - arkade install kubectl@v1.23.3
+    
+  apt-install:
+    deps:
+    - install-apt-fast
+    cmds:
+    - apt-fast install -y fpm dropbear
+    
+  #github-install:
+  # cmds:
+  #  - starship, dust, btop, nfpm, ctop, lazydocker
 
+  upx-compress:
+    cmds:
+    - upx /usr/local/bin/*
+    - upx ~/.arkade/bin/*
+  clean-tmp:
+    cmds:
+    - rm -rf /tmp/*
+    
   build:
     cmds:
     - task: oh-my-bash
     - task: install-dingtalk
+    - task: arkade-install
+    - task: apt-install
+    - task: upx-compress
+    - chmod +x /usr/local/bin/*
+    - task: clean-tmp
 
   default:
     cmds:
