@@ -111,6 +111,12 @@ tasks:
     - brew install asdf
     - echo '. "$HOME/.asdf/asdf.sh" >> ~/.bashrc
     - echo '. "$HOME/.asdf/completions/asdf.bash"' >> ~/.bashrc
+
+  bashrc-complete-alias:
+    cmds:
+    - wget -O ~/.complete_alias https://raw.githubusercontent.com/cykerway/complete-alias/master/complete_alias
+    - echo "#--- complete_alias ---#" >> ~/.bashrc
+    - echo 'export COMPAL_AUTO_UNMASK=1' >> ~/.bashrc
     
   upx-compress:
     cmds:
@@ -124,6 +130,7 @@ tasks:
   build:
     cmds:
     - task: oh-my-bash
+    - task: bashrc-complete-alias
     - task: install-dingtalk
     - task: arkade-install-utils
     - task: apt-install-kubectl
