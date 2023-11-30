@@ -5,3 +5,25 @@ tasks:
     cmds:
     - bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)" --unattended
     silent: false
+  install-upx:
+    dir: /tmp
+    cmds:
+    - |
+      wget https://github.com/upx/upx/releases/download/v4.2.1/upx-4.2.1-amd64_linux.tar.xz
+      tar xf upx-4.2.1-amd64_linux.tar.xz
+      mv upx-4.2.1-amd64_linux/upx /usr/local/bin/ && chmod +x /usr/local/bin/upx
+      rm -rf upx*
+  install-dingtalk:
+    dir: /tmp
+    cmds:
+    - |
+      wget https://github.com/CatchZeng/dingtalk/releases/download/v1.5.0/dingtalk-linux-amd64.zip
+      unzip -d /usr/local/bin dingtalk-linux-amd64.zip
+      rm -f dingtalk-linux-amd64.zip
+      chmod +x /usr/local/bin/dingtalk
+
+  build:
+    cmds:
+    - task: oh-my-bash
+    - task: install-upx
+    - task: install-dingtalk
