@@ -81,11 +81,11 @@ jobs:
             latest=auto
             prefix=
             suffix=
-          tags: |
-            type=raw,enabled=true,pattern={{date 'YYYYMMDD-HHmmss' tz='Asia/Shanghai'}},value=
-            #type=raw,enable=true,priority=200,prefix=,suffix=,value=
-            # set latest tag for master branch
-            #type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'master') }}
+          #tags: |
+          #  type=raw,enabled=true,value={{date 'YYYYMMDD'}}
+          #  #type=raw,enable=true,priority=200,prefix=,suffix=,value=
+          #  # set latest tag for master branch
+          #  #type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'master') }}
             
       - name: Install Task
         uses: arduino/setup-task@v1
