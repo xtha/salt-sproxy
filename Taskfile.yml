@@ -4,9 +4,8 @@ tasks:
   install-apt-fast:
     cmds:
     - |
-      mkdir -p /etc/apt/keyrings
-      curl -fsSL https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xA2166B8DE8BDC3367D1901C11EE2FF37CA8DA16B | gpg --dearmor -o /etc/apt/keyrings/apt-fast.gpg
-      apt-get install -y apt-fast
+      apt-get install -y gnupg
+      /bin/bash -c "$(curl -sL https://git.io/vokNn)"
       echo debconf apt-fast/maxdownloads string 16 | debconf-set-selections
       echo debconf apt-fast/dlflag boolean true | debconf-set-selections
       echo debconf apt-fast/aptmanager string apt-get | debconf-set-selections
