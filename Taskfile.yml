@@ -28,3 +28,7 @@ tasks:
     - task: oh-my-bash
     - task: install-upx
     - task: install-dingtalk
+
+  default:
+    cmds:
+    - task: build
