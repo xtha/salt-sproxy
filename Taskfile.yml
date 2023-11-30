@@ -15,7 +15,7 @@ tasks:
     deps:
     - install-apt-fast
     cmds:
-    - apt-fast install -y direnv curl wget aria2 axel file tree ncdu neofetch htop dstat iotop unzip git
+    - apt-fast install -y direnv curl wget aria2 axel file tree ncdu neofetch htop dstat iotop unzip git apt-transport-https ca-certificates
     
   oh-my-bash:
     deps:
@@ -66,6 +66,7 @@ tasks:
     - bashrc-kubectl-alias
     cmds:
     - arkade get kubectl@v1.23.3 kustomize kubecm
+    - mv ~/.arkade/bin/kubectl /usr/local/bin/kubectl && chmod +x /usr/local/bin/kubectl
     - |
       (
       set -x; cd "$(mktemp -d)" &&
@@ -77,7 +78,7 @@ tasks:
       ./"${KREW}" install krew
       )
     - echo 'export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"' >> ~/.bashrc
-    - kubectl krew install ice df-pv ktop
+    - /usr/local/bin/kubectl krew install ice df-pv ktop
     
   arkade-install-helmfile:
     deps:
