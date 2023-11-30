@@ -20,7 +20,7 @@ RUN apt-get update \
 RUN sh -x -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin \
     && echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc \
     && wget https://github.com/CatchZeng/dingtalk/releases/download/v1.5.0/dingtalk-linux-amd64.zip \
-    && unzip -d /usr/local/bin \
+    && unzip -d /usr/local/bin dingtalk-linux-amd64.zip \
     && chmod +x /usr/local/bin/dingtalk
     
 COPY Taskfile.yml ~/Taskfile.yml
