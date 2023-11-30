@@ -18,14 +18,11 @@ RUN apt-get update \
 
 # add task command
 RUN sh -x -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin \
-    && echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc \
-    && pwd \
-    && ls; cat Taskfile.yml
-    #&& wget https://github.com/CatchZeng/dingtalk/releases/download/v1.5.0/dingtalk-linux-amd64.zip \
-    #&& unzip -d /usr/local/bin dingtalk-linux-amd64.zip \
-    #&& chmod +x /usr/local/bin/dingtalk
-    # cd /tmp ; wget https://github.com/upx/upx/releases/download/v4.2.1/upx-4.2.1-amd64_linux.tar.xz && tar xf upx-4.2.1-amd64_linux.tar.xz && mv upx-4.2.1-amd64_linux/upx /usr/local/bin/ && chmod +x /usr/local/bin/upx
+    && echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
     
 COPY ./Taskfile.yml /root/Taskfile.yml
-#COPY --from=catchzeng/dingtalk /usr/local/bin/dingtalk /usr/local/bin/dingtalk
+#wget https://github.com/CatchZeng/dingtalk/releases/download/v1.5.0/dingtalk-linux-amd64.zip \
+#&& unzip -d /usr/local/bin dingtalk-linux-amd64.zip \
+#&& chmod +x /usr/local/bin/dingtalk
+# cd /tmp ; wget https://github.com/upx/upx/releases/download/v4.2.1/upx-4.2.1-amd64_linux.tar.xz && tar xf upx-4.2.1-amd64_linux.tar.xz && mv upx-4.2.1-amd64_linux/upx /usr/local/bin/ && chmod +x /usr/local/bin/upx
 
