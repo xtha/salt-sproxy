@@ -47,14 +47,39 @@ tasks:
   install-arkade:
     cmds:
     - curl -sLS https://get.arkade.dev | sh
-  arkade-install:
+    
+  arkade-install-utils:
     deps:
     - install-arkade
     cmds:
     - arkade install fzf gh jq sops lazygit mc mkcert packer terraform 
     - arkade install gomplate hadolint k9s nerdctl cr dive crane 
-    - arkade install helm helmfile popeye sternflux kail krew kubecm kustomize
-    - arkade install kubectl@v1.23.3
+
+  arkade-install-kubectl:
+    deps:
+    - install-arkade
+    cmds:
+    - arkade install kubectl@v1.23.3 kustomize kubecm
+    
+  arkade-install-helmfile:
+    deps:
+    - install-arkade
+    - arkade-install-kubectl
+    - arkade-install-krew
+    cmds:
+    - arkade install helm helmfile popeye stern flux kail
+    - helm plugin install https://github.com/databus23/helm-diff
+    - helm plugin install https://github.com/chartmuseum/helm-push
+    - helm plugin install https://github.com/nikhilsbhat/helm-images
+    - helm plugin install https://github.com/hypnoglow/helm-s3.git
+
+  arkade-install-krew:
+    deps:
+    - install-arkade
+    - arkade-install-kubectl
+    cmds:
+    - arkade install krew
+    - krew install ice df-pv ktop
     
   apt-install:
     deps:
@@ -70,6 +95,7 @@ tasks:
     cmds:
     - upx /usr/local/bin/*
     - upx ~/.arkade/bin/*
+    
   clean-tmp:
     cmds:
     - rm -rf /tmp/*
@@ -78,10 +104,12 @@ tasks:
     cmds:
     - task: oh-my-bash
     - task: install-dingtalk
-    - task: arkade-install
-    - task: apt-install
+    - task: arkade-install-utils
+    - task: apt-install-kubectl
+    - task: apt-install-krew
+    - task: apt-install-helmfile
     - task: upx-compress
-    - chmod +x /usr/local/bin/*
+    - chmod +x /usr/local/bin/* ~/.arkade/bin/*
     - task: clean-tmp
 
   default:
