@@ -26,6 +26,6 @@ RUN sh -x -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.lo
     #&& chmod +x /usr/local/bin/dingtalk
     # cd /tmp ; wget https://github.com/upx/upx/releases/download/v4.2.1/upx-4.2.1-amd64_linux.tar.xz && tar xf upx-4.2.1-amd64_linux.tar.xz && mv upx-4.2.1-amd64_linux/upx /usr/local/bin/ && chmod +x /usr/local/bin/upx
     
-COPY Taskfile.yml ~/Taskfile.yml
+COPY ./Taskfile.yml /root/Taskfile.yml
 #COPY --from=catchzeng/dingtalk /usr/local/bin/dingtalk /usr/local/bin/dingtalk
 
