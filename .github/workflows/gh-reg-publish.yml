@@ -75,6 +75,17 @@ jobs:
       - name: Extract Docker metadata
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        flavor: |
+          latest=auto
+          prefix=
+          suffix=
+        tags:
+          type={{date 'YYYYMMDD-HHmmss' tz='Asia/Shanghai'}}
+          type=raw,enable=true,priority=200,prefix=,suffix=,value=
+          # set latest tag for master branch
+          #type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'master') }}
+          # set latest tag for default branch
+          type=raw,value=latest,enable={{is_default_branch}}
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
@@ -93,7 +104,9 @@ jobs:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          labels: |
+            ${{ steps.meta.outputs.labels }}
+            taskfile.enabled=true
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
