@@ -91,8 +91,15 @@ tasks:
     - arkade get helm helmfile popeye stern flux kail; mv /root/.arkade/bin/* /usr/local/bin; chmod +x /usr/local/bin/*
     - helm plugin install https://github.com/databus23/helm-diff
     - helm plugin install https://github.com/chartmuseum/helm-push
-    #- helm plugin install https://github.com/nikhilsbhat/helm-images
-    #- helm plugin install https://github.com/hypnoglow/helm-s3.git
+    - |
+      aria2c https://github.com/nikhilsbhat/helm-images/releases/download/v0.1.0/helm-images_0.1.0_Linux_x86_64.tar.gz
+      mkdir -p  /root/.local/share/helm/plugins/helm-images
+      tar -xvf helm-images_0.1.0_Linux_x86_64.tar.gz -C /root/.local/share/helm/plugins/helm-images
+    
+  helm-plugin-install:
+    dir: /tmp
+    cmd:
+    - helm plugin install https://github.com/hypnoglow/helm-s3.git
 
   apt-install:
     deps:
