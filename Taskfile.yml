@@ -57,7 +57,7 @@ tasks:
     deps:
     - install-arkade
     cmds:
-    - arkade get fzf gh jq sops lazygit mc mkcert packer terraform 
+    - arkade get fzf gh jq sops lazygit mc mkcert packer terraform
     - arkade get gomplate hadolint k9s nerdctl cr dive crane 
 
   arkade-install-kubectl:
@@ -83,8 +83,6 @@ tasks:
     - aria2c https://github.com/particledecay/kconf/releases/download/v2.0.0/kconf-linux-x86_64-2.0.0.tar.gz
   
   arkade-install-helmfile:
-    variables:
-      PATH: "${KREW_ROOT:-$HOME/.krew}/bin:~/.arkade/bin:$PATH"
     deps:
     - arkade-install-kubectl
     cmds:
@@ -98,7 +96,7 @@ tasks:
     
   helm-plugin-install:
     dir: /tmp
-    cmd:
+    cmds:
     - helm plugin install https://github.com/hypnoglow/helm-s3.git
 
   apt-install:
@@ -109,9 +107,9 @@ tasks:
     
   github-install:
     cmds:
-    #- dust, btop, ctop, lazydocker
     - task: github-install-xh
     - task: github-install-starship
+    #- dust, btop, ctop, lazydocker
     
   github-install-kubie:
     cmds:
