@@ -46,7 +46,7 @@ tasks:
 
   install-linuxbrew:
     cmds:
-    - user add brew
+    - useradd brew
     - usermod -aG sudo brew
     - su - brew; /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     
