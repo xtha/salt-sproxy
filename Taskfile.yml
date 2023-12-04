@@ -33,7 +33,9 @@ tasks:
     - |
       wget https://github.com/upx/upx/releases/download/v4.2.1/upx-4.2.1-amd64_linux.tar.xz
       tar xf upx-4.2.1-amd64_linux.tar.xz
-      mv upx-4.2.1-amd64_linux/upx /usr/local/bin/ && chmod +x /usr/local/bin/upx
+      mv upx-4.2.1-amd64_linux/upx /usr/local/bin/
+      chmod +x /usr/local/bin/upx
+      rm -f upx-4.2.1-amd64_linux.tar.xz
       
   install-dingtalk:
     dir: /tmp
@@ -165,8 +167,8 @@ tasks:
     
   upx-compress:
     cmds:
-    - upx /usr/local/bin/* || true
-    - upx ~/.arkade/bin/* || true
+    - /usr/local/bin/upx /usr/local/bin/* || true
+    - /usr/local/bin/upx ~/.arkade/bin/* || true
     
   clean-tmp:
     cmds:
