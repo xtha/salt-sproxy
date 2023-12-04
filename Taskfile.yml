@@ -91,7 +91,7 @@ tasks:
     deps:
     - arkade-install-kubectl
     cmds:
-    - arkade get helm helmfile popeye stern flux kail
+    - arkade get helm helmfile popeye stern flux kail; mv /root/.arkade/bin/* /usr/local/bin; chmod +x /usr/local/bin/* ; upx /usr/local/bin/*
     - helm plugin install https://github.com/databus23/helm-diff
     - helm plugin install https://github.com/chartmuseum/helm-push
     - helm plugin install https://github.com/nikhilsbhat/helm-images
