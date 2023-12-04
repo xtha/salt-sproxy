@@ -119,9 +119,14 @@ tasks:
     - wget -O /usr/local/bin/kubie https://github.com/sbstp/kubie/releases/download/v0.22.0/kubie-linux-amd64
 
   github-install-starship:
+    dir: /tmp
     cmds:
-    - curl -sS https://starship.rs/install.sh | sh
-    - echo 'eval "$(starship init bash)"' >> ~/.bashrc
+    - |
+      wget https://github.com/starship/starship/releases/download/v1.16.0/starship-x86_64-unknown-linux-musl.tar.gz
+      tar xf starship-x86_64-unknown-linux-musl.tar.gz
+      mv starship /usr/local/bin
+      echo 'eval "$(starship init bash)"' >> ~/.bashrc
+      rm -f starship-x86_64-unknown-linux-musl.tar.gz
 
   apt-install-fpm:
     dir: /tmp
