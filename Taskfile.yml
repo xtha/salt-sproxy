@@ -7,7 +7,7 @@ tasks:
   install-apt-fast:
     cmds:
     - |
-      apt-get update && apt-get install -y sudo gnupg
+      apt-get update && apt-get install -y sudo gnupg age
       /bin/bash -c "$(curl -sL https://git.io/vokNn)"
       echo debconf apt-fast/maxdownloads string 16 | debconf-set-selections
       echo debconf apt-fast/dlflag boolean true | debconf-set-selections
@@ -112,6 +112,7 @@ tasks:
     - task: github-install-xh
     - task: github-install-starship
     #- dust, btop, ctop, lazydocker
+    - wget -O /usr/local/bin/yj https://github.com/sclevine/yj/releases/download/v5.1.0/yj-linux-amd64
     
   github-install-kubie:
     cmds:
@@ -123,15 +124,17 @@ tasks:
     - echo 'eval "$(starship init bash)"' >> ~/.bashrc
 
   apt-install-fpm:
+    dir: /tmp
     cmds:
     - apt-get install -y ruby-dev build-essential
     - gem i fpm -f
+    - wget https://github.com/goreleaser/nfpm/releases/download/v2.34.0/nfpm_2.34.0_amd64.deb; dpkg -i nfpm_2.34.0_amd64.deb
     
   brew-install:
     deps:
     - install-linuxbrew
     cmds:
-    - brew install asdf age dust fzf autojump zoxide nfpm yj
+    - brew install asdf dust fzf autojump zoxide
     - echo '. "$HOME/.asdf/asdf.sh" >> ~/.bashrc
     - echo '. "$HOME/.asdf/completions/asdf.bash"' >> ~/.bashrc
 
