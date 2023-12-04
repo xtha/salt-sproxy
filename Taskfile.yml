@@ -150,8 +150,13 @@ tasks:
     - echo '[ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases' >> ~/.bashrc
 
   github-install-xh:
+    dir: /tmp
     cmds:
-    - curl -sfL https://raw.githubusercontent.com/ducaale/xh/master/install.sh | sh
+    - |
+      wget https://github.com/ducaale/xh/releases/download/v0.20.1/xh-v0.20.1-x86_64-unknown-linux-musl.tar.gz
+      tar xf xh-v0.20.1-x86_64-unknown-linux-musl.tar.gz
+      mv xh-v0.20.1-x86_64-unknown-linux-musl/xh /usr/local/bin/
+      rm -f xh-v0.20.1-x86_64-unknown-linux-musl.tar.gz
     
   upx-compress:
     cmds:
