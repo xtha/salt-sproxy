@@ -1,7 +1,7 @@
 version: '3'
 
 variables:
-  PATH: ${KREW_ROOT:-$HOME/.krew}/bin:$PATH:~/.arkade/bin
+  PATH: "${KREW_ROOT:-$HOME/.krew}/bin:~/.arkade/bin:$PATH"
   
 tasks:
   install-apt-fast:
@@ -81,11 +81,13 @@ tasks:
       tar zxvf "${KREW}.tar.gz" &&
       ./"${KREW}" install krew
       )
-    - echo 'export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"' >> ~/.bashrc
+    - echo 'export PATH="${KREW_ROOT:-$HOME/.krew}/bin:~/.arkade/bin:$PATH"' >> ~/.bashrc
     #- /usr/local/bin/kubectl krew install ice df-pv ktop
     - aria2c https://github.com/particledecay/kconf/releases/download/v2.0.0/kconf-linux-x86_64-2.0.0.tar.gz
-    
+  
   arkade-install-helmfile:
+    variables:
+      PATH: "${KREW_ROOT:-$HOME/.krew}/bin:~/.arkade/bin:$PATH"
     deps:
     - arkade-install-kubectl
     cmds:
