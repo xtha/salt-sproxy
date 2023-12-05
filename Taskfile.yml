@@ -89,7 +89,7 @@ tasks:
       ./"${KREW}" install krew
       )
     - echo 'export PATH="${KREW_ROOT:-$HOME/.krew}/bin:~/.arkade/bin:$PATH"' >> ~/.bashrc
-    - /usr/local/bin/kubectl krew install stern ice df-pv ktop view-cert viewnode ssh-jump sick-pods restart resource-capacity prune-unused datree example get-all gopass htpasswd images kc ktop konfig neat nsenter popeye
+    - export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"; /usr/local/bin/kubectl krew install stern ice df-pv ktop view-cert viewnode ssh-jump sick-pods restart resource-capacity prune-unused datree example get-all gopass htpasswd images kc ktop konfig neat nsenter popeye
     - aria2c https://github.com/particledecay/kconf/releases/download/v2.0.0/kconf-linux-x86_64-2.0.0.tar.gz
   
   arkade-install-helmfile:
