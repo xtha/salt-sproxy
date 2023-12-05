@@ -49,9 +49,8 @@ tasks:
 
   install-linuxbrew:
     cmds:
-    - useradd brew
-    - usermod -aG sudo brew
-    - su - brew; /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    - curl -fsSL -o install.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+    - NONINTERACTIVE=1 bash install.sh
     
   install-arkade:
     run: once
@@ -103,6 +102,7 @@ tasks:
       aria2c https://github.com/nikhilsbhat/helm-images/releases/download/v0.1.0/helm-images_0.1.0_Linux_x86_64.tar.gz
       mkdir -p  /root/.local/share/helm/plugins/helm-images
       tar -xvf helm-images_0.1.0_Linux_x86_64.tar.gz -C /root/.local/share/helm/plugins/helm-images
+      rm -rf helm-images*
     
   helm-plugin-install:
     dir: /tmp
@@ -136,7 +136,7 @@ tasks:
       echo 'eval "$(starship init bash)"' >> ~/.bashrc
       rm -f starship-x86_64-unknown-linux-musl.tar.gz
 
-  apt-install-fpm:
+  apt-install-nfpm:
     dir: /tmp
     cmds:
     - apt-get install -y ruby-dev build-essential
@@ -188,7 +188,7 @@ tasks:
     - task: apt-install
     - task: arkade-install-utils
     - task: arkade-install-helmfile
-    #- task: brew-install
+    - task: brew-install
     - task: github-install
     #- task: apt-install-fpm
     - task: upx-compress
