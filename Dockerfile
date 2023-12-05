@@ -43,14 +43,15 @@ USER $USERNAME
 WORKDIR /home/docker
 
 # add task command
-RUN sudo wget https://github.com/go-task/task/releases/download/v3.32.0/task_linux_amd64.deb \
-    && dpkg -i task_linux_amd64.deb \
+RUN wget https://github.com/go-task/task/releases/download/v3.32.0/task_linux_amd64.deb \
+    && sudo dpkg -i task_linux_amd64.deb \
     && rm -f task_linux_amd64.deb \
     && echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
 
-RUN sudo curl -fsSL -o install.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh \
+RUN curl -fsSL -o install.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh \
     && export NONINTERACTIVE=1 \
-    && sudo bash install.sh
+    && chmod a+x install.sh
+    && sudo ./install.sh
 
 COPY ./Taskfile.yml /root/Taskfile.yml
 RUN sudo task
