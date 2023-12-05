@@ -181,7 +181,7 @@ tasks:
     - task: apt-install
     - task: arkade-install-utils
     - task: arkade-install-helmfile
-    - task: brew-install
+    #- task: brew-install
     - task: github-install
     #- task: apt-install-fpm
     - task: upx-compress
