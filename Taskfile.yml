@@ -7,7 +7,7 @@ tasks:
   install-apt-fast:
     cmds:
     - |
-      apt-get update && apt-get install -y sudo gnupg age
+      apt-get update && apt-get install -y -q sudo gnupg age
       /bin/bash -c "$(curl -sL https://git.io/vokNn)"
       echo debconf apt-fast/maxdownloads string 16 | debconf-set-selections
       echo debconf apt-fast/dlflag boolean true | debconf-set-selections
@@ -18,7 +18,7 @@ tasks:
     deps:
     - install-apt-fast
     cmds:
-    - apt-fast install -y direnv curl wget aria2 axel file tree ncdu neofetch htop dstat iotop unzip git apt-transport-https ca-certificates
+    - apt-fast install -y -q direnv curl wget aria2 axel file tree ncdu neofetch htop dstat iotop unzip git apt-transport-https ca-certificates
     
   oh-my-bash:
     deps:
@@ -32,17 +32,17 @@ tasks:
     run: once
     cmds:
     - |
-      wget https://github.com/upx/upx/releases/download/v4.2.1/upx-4.2.1-amd64_linux.tar.xz
+      wget -q https://github.com/upx/upx/releases/download/v4.2.1/upx-4.2.1-amd64_linux.tar.xz
       tar xf upx-4.2.1-amd64_linux.tar.xz
       mv upx-4.2.1-amd64_linux/upx /usr/local/bin/
       chmod +x /usr/local/bin/upx
-      rm -f upx-4.2.1-amd64*
+      rm -fr upx-4.2.1-amd64*
       
   install-dingtalk:
     dir: /tmp
     cmds:
     - |
-      wget https://github.com/CatchZeng/dingtalk/releases/download/v1.5.0/dingtalk-linux-amd64.zip
+      wget -q https://github.com/CatchZeng/dingtalk/releases/download/v1.5.0/dingtalk-linux-amd64.zip
       unzip -d /usr/local/bin dingtalk-linux-amd64.zip
       rm -f dingtalk-linux-amd64.zip
       chmod +x /usr/local/bin/dingtalk
