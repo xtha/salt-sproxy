@@ -55,7 +55,7 @@ tasks:
   install-arkade:
     run: once
     cmds:
-    - aria2c -o /usr/local/bin https://github.com/alexellis/arkade/releases/download/0.10.17/arkade
+    - aria2c -d /usr/local/bin https://github.com/alexellis/arkade/releases/download/0.10.17/arkade
     - chmod +x /usr/local/bin/arkade
     - upx /usr/local/bin/arkade
     
