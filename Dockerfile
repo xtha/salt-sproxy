@@ -50,7 +50,7 @@ RUN wget https://github.com/go-task/task/releases/download/v3.32.0/task_linux_am
 
 RUN curl -fsSL -o install.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh \
     && export NONINTERACTIVE=1 \
-    && chmod a+x install.sh
+    && chmod a+x install.sh \
     && sudo ./install.sh
 
 COPY ./Taskfile.yml /root/Taskfile.yml
