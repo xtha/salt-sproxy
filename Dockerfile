@@ -48,6 +48,7 @@ RUN wget https://github.com/go-task/task/releases/download/v3.32.0/task_linux_am
     && rm -f task_linux_amd64.deb \
     && echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
 
-RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+# RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
 COPY ./Taskfile.yml /root/Taskfile.yml
 RUN sudo task
