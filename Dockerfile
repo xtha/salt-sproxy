@@ -50,5 +50,5 @@ RUN wget https://github.com/go-task/task/releases/download/v3.32.0/task_linux_am
 
 # RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-COPY ./Taskfile.yml /root/Taskfile.yml
+COPY ./Taskfile.yml /home/docker/Taskfile.yml
 RUN sudo task
