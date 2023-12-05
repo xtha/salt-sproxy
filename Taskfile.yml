@@ -46,11 +46,6 @@ tasks:
       unzip -d /usr/local/bin dingtalk-linux-amd64.zip
       rm -f dingtalk-linux-amd64.zip
       chmod +x /usr/local/bin/dingtalk
-
-  install-linuxbrew:
-    cmds:
-    - curl -fsSL -o install.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
-    - NONINTERACTIVE=1 bash install.sh
     
   install-arkade:
     run: once
@@ -144,8 +139,6 @@ tasks:
     - wget https://github.com/goreleaser/nfpm/releases/download/v2.34.0/nfpm_2.34.0_amd64.deb; dpkg -i nfpm_2.34.0_amd64.deb; rm -f dpkg -i nfpm_2.34.0_amd64.deb
     
   brew-install:
-    deps:
-    - install-linuxbrew
     cmds:
     - brew install asdf dust fzf autojump zoxide
     - echo '. "$HOME/.asdf/asdf.sh" >> ~/.bashrc
