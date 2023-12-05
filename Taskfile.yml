@@ -29,13 +29,14 @@ tasks:
     
   install-upx:
     dir: /tmp
+    run: once
     cmds:
     - |
       wget https://github.com/upx/upx/releases/download/v4.2.1/upx-4.2.1-amd64_linux.tar.xz
       tar xf upx-4.2.1-amd64_linux.tar.xz
       mv upx-4.2.1-amd64_linux/upx /usr/local/bin/
       chmod +x /usr/local/bin/upx
-      rm -f upx-4.2.1-amd64_linux.tar.xz
+      rm -f upx-4.2.1-amd64*
       
   install-dingtalk:
     dir: /tmp
@@ -54,6 +55,8 @@ tasks:
     
   install-arkade:
     run: once
+    deps:
+    - install-upx
     cmds:
     - aria2c -d /usr/local/bin https://github.com/alexellis/arkade/releases/download/0.10.17/arkade
     - chmod +x /usr/local/bin/arkade
