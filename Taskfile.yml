@@ -55,14 +55,17 @@ tasks:
   install-arkade:
     run: once
     cmds:
-    - curl -sLS https://get.arkade.dev | sh
+    - aria2c -o /usr/local/bin https://github.com/alexellis/arkade/releases/download/0.10.17/arkade
+    - chmod +x /usr/local/bin/arkade
+    - upx /usr/local/bin/arkade
     
   arkade-install-utils:
     deps:
     - install-arkade
     cmds:
     - arkade get fzf gh jq sops lazygit mc mkcert packer terraform
-    - arkade get gomplate hadolint k9s nerdctl cr dive crane 
+    - arkade get gomplate hadolint k9s nerdctl cr dive crane
+    - mv ~/.arkade/bin/* /usr/local/bin/
 
   arkade-install-kubectl:
     dir: /tmp
@@ -180,12 +183,13 @@ tasks:
     - task: bashrc-complete-alias
     - task: install-dingtalk
     - task: apt-install
+    - task: arkade-install-utils
     - task: arkade-install-helmfile
     #- task: brew-install
     - task: github-install
     #- task: apt-install-fpm
     - task: upx-compress
-    - chmod +x /usr/local/bin/* ~/.arkade/bin/*
+    - chmod +x /usr/local/bin/*
     - task: clean-tmp
 
   default:
