@@ -46,7 +46,10 @@ WORKDIR /home/docker
 RUN wget https://github.com/go-task/task/releases/download/v3.32.0/task_linux_amd64.deb \
     && sudo dpkg -i task_linux_amd64.deb \
     && rm -f task_linux_amd64.deb \
-    && echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
+    && echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc \
+    && sudo wget -O /etc/apt/sources.list.d/gitlab-ci-local.sources https://gitlab-ci-local-ppa.firecow.dk/gitlab-ci-local.sources \
+    && sudo apt-get update \
+    && sudo apt-get install gitlab-ci-local
 
 # RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
