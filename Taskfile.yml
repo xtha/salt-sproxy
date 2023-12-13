@@ -32,7 +32,7 @@ tasks:
     run: once
     cmds:
     - |
-      wget -q https://github.com/upx/upx/releases/download/v$UPX_VERSION/upx-v$4.2.1-amd64_linux.tar.xz
+      wget -q https://github.com/upx/upx/releases/download/v4.2.1/upx-4.2.1-amd64_linux.tar.xz
       tar xf upx-4.2.1-amd64_linux.tar.xz
       mv upx-4.2.1-amd64_linux/upx /usr/local/bin/
       chmod +x /usr/local/bin/upx
