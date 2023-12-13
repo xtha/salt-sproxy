@@ -2,7 +2,7 @@ version: '3'
 
 vars:
   PATH: "${KREW_ROOT:-$HOME/.krew}/bin:~/.arkade/bin:$PATH"
-  
+
 tasks:
   install-apt-fast:
     cmds:
@@ -13,31 +13,31 @@ tasks:
       echo debconf apt-fast/dlflag boolean true | debconf-set-selections
       echo debconf apt-fast/aptmanager string apt-get | debconf-set-selections
       echo 'MIRRORS=( 'http://deb.debian.org/debian','http://ftp.debian.org/debian, http://ftp2.de.debian.org/debian, http://ftp.de.debian.org/debian, ftp://ftp.uni-kl.de/debian' )' >> /etc/apt-fast.conf
-  
+
   install-utils:
     deps:
     - install-apt-fast
     cmds:
     - apt-fast install -y -q direnv curl wget aria2 axel file tree ncdu neofetch htop dstat iotop unzip git apt-transport-https ca-certificates
-    
+
   oh-my-bash:
     deps:
     - install-utils
     cmds:
     - bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)" --unattended
     silent: false
-    
+
   install-upx:
     dir: /tmp
     run: once
     cmds:
     - |
-      wget -q https://github.com/upx/upx/releases/download/v$UPX_VERSION/upx-$UPX_VERSION-amd64_linux.tar.xz
+      wget -q https://github.com/upx/upx/releases/download/v$UPX_VERSION/upx-v$4.2.1-amd64_linux.tar.xz
       tar xf upx-4.2.1-amd64_linux.tar.xz
       mv upx-4.2.1-amd64_linux/upx /usr/local/bin/
       chmod +x /usr/local/bin/upx
       rm -fr upx-4.2.1-amd64*
-      
+
   install-dingtalk:
     dir: /tmp
     cmds:
@@ -46,7 +46,7 @@ tasks:
       unzip -d /usr/local/bin dingtalk-linux-amd64.zip
       rm -f dingtalk-linux-amd64.zip
       chmod +x /usr/local/bin/dingtalk
-    
+
   install-arkade:
     run: once
     deps:
@@ -55,7 +55,7 @@ tasks:
     - aria2c -d /usr/local/bin https://github.com/alexellis/arkade/releases/download/0.10.17/arkade
     - chmod +x /usr/local/bin/arkade
     - upx /usr/local/bin/arkade
-    
+
   arkade-install-utils:
     deps:
     - install-arkade
@@ -85,7 +85,7 @@ tasks:
     - echo 'export PATH="${KREW_ROOT:-$HOME/.krew}/bin:~/.arkade/bin:$PATH"' >> ~/.bashrc
     - export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"; /usr/local/bin/kubectl krew install stern ice df-pv ktop view-cert viewnode ssh-jump sick-pods restart resource-capacity prune-unused datree example get-all gopass htpasswd images kc ktop konfig neat nsenter popeye
     - aria2c https://github.com/particledecay/kconf/releases/download/v2.0.0/kconf-linux-x86_64-2.0.0.tar.gz
-  
+
   arkade-install-helmfile:
     deps:
     - arkade-install-kubectl
@@ -98,7 +98,7 @@ tasks:
       mkdir -p  /root/.local/share/helm/plugins/helm-images
       tar -xvf helm-images_0.1.0_Linux_x86_64.tar.gz -C /root/.local/share/helm/plugins/helm-images
       rm -rf helm-images*
-    
+
   helm-plugin-install:
     dir: /tmp
     cmds:
@@ -109,7 +109,7 @@ tasks:
     - install-apt-fast
     cmds:
     - apt-fast install -y dropbear neovim exa
-    
+
   github-install:
     cmds:
     - task: github-install-xh
@@ -122,7 +122,7 @@ tasks:
     cmds:
     #- dust, btop, ctop, lazydocker
     - wget -O /usr/local/bin/skopeo https://github.com/lework/skopeo-binary/releases/download/v1.13.3/skopeo-linux-amd64
-    
+
   github-install-kubie:
     cmds:
     - wget -O /usr/local/bin/kubie https://github.com/sbstp/kubie/releases/download/v0.22.0/kubie-linux-amd64
@@ -143,7 +143,7 @@ tasks:
     - apt-get install -y ruby-dev build-essential
     - gem i fpm -f
     - wget https://github.com/goreleaser/nfpm/releases/download/v2.34.0/nfpm_2.34.0_amd64.deb; dpkg -i nfpm_2.34.0_amd64.deb; rm -f dpkg -i nfpm_2.34.0_amd64.deb
-    
+
   brew-install:
     cmds:
     - brew install asdf dust fzf autojump zoxide
@@ -169,16 +169,16 @@ tasks:
       tar xf xh-v0.20.1-x86_64-unknown-linux-musl.tar.gz
       mv xh-v0.20.1-x86_64-unknown-linux-musl/xh /usr/local/bin/
       rm -f xh-v0.20.1-x86_64-unknown-linux-musl.tar.gz
-    
+
   upx-compress:
     cmds:
     - /usr/local/bin/upx /usr/local/bin/* || true
     - /usr/local/bin/upx ~/.arkade/bin/* || true
-    
+
   clean-tmp:
     cmds:
     - rm -rf /tmp/*
-    
+
   build:
     cmds:
     - task: oh-my-bash
