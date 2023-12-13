@@ -1,6 +1,6 @@
 version: '3'
 
-variables:
+vars:
   PATH: "${KREW_ROOT:-$HOME/.krew}/bin:~/.arkade/bin:$PATH"
   
 tasks:
@@ -114,8 +114,14 @@ tasks:
     cmds:
     - task: github-install-xh
     - task: github-install-starship
+    - task: github-install-skopeo
     #- dust, btop, ctop, lazydocker
     - wget -O /usr/local/bin/yj https://github.com/sclevine/yj/releases/download/v5.1.0/yj-linux-amd64
+
+  github-install-skopeo:
+    cmds:
+    #- dust, btop, ctop, lazydocker
+    - wget -O /usr/local/bin/skopeo https://github.com/lework/skopeo-binary/releases/download/v1.13.3/skopeo-linux-amd64
     
   github-install-kubie:
     cmds:
