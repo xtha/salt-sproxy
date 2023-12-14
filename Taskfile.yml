@@ -137,22 +137,16 @@ tasks:
     - wget -O /usr/local/bin/kubie https://github.com/sbstp/kubie/releases/download/v0.22.0/kubie-linux-amd64
 
   install-gitlab-ci-local:
-    deps:
-    - task: install-pipx
     cmds:
     # [firecow/gitlab-ci-local: Tired of pushing to test your .gitlab-ci.yml?](https://github.com/firecow/gitlab-ci-local?tab=readme-ov-file#installation)
     - wget -O /etc/apt/sources.list.d/gitlab-ci-local.sources https://gitlab-ci-local-ppa.firecow.dk/gitlab-ci-local.sources
     - apt-get update && apt-get install gitlab-ci-local -y --no-install-recommends && rm -rf /var/lib/apt/lists*
-    # [Annnouncing glabvars: a Python wrapper for obtaining GitLab CI variables -](https://42analytics.eu/announcing-glabvars.html)
-    - pipx install glabvars
-    
-  monitoring-utils:
-    cmds:
-    - pipx install snimpy
 
   python-dev:
     cmds:
-    - pip install --user pipx; pipx install fastapi
+    # [Annnouncing glabvars: a Python wrapper for obtaining GitLab CI variables -](https://42analytics.eu/announcing-glabvars.html)
+    - pip install --user pipx
+    - ~/.local/bin/pipx install fastapi snimpy globalvars
     
   github-install-starship:
     dir: /tmp
@@ -218,7 +212,6 @@ tasks:
     #- task: brew-install
     - task: github-install
     - task: install-gitlab-ci-local
-    #- task: monitoring-utils
     #- task: apt-install-fpm
     - task: upx-compress
     - chmod +x /usr/local/bin/*
