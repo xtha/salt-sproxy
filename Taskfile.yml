@@ -146,8 +146,10 @@ tasks:
     cmds:
     # [Annnouncing glabvars: a Python wrapper for obtaining GitLab CI variables -](https://42analytics.eu/announcing-glabvars.html)
     - pip install --user pipx
-    - ~/.local/bin/pipx install fastapi snimpy globalvars
-    
+    - ~/.local/bin/pipx install fastapi
+    - ~/.local/bin/pipx install snimpy
+    - ~/.local/bin/pipx install globalvars
+      
   github-install-starship:
     dir: /tmp
     cmds:
