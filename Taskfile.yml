@@ -1,7 +1,7 @@
 version: '3'
 
 vars:
-  PATH: "${KREW_ROOT:-$HOME/.krew}/bin:~/.arkade/bin:$PATH"
+  PATH: "${KREW_ROOT:-$HOME/.krew}/bin:~/.arkade/bin:~/.local/bin/pipx:$PATH"
 
 tasks:
   install-apt-fast:
@@ -13,10 +13,6 @@ tasks:
       echo debconf apt-fast/dlflag boolean true | debconf-set-selections
       echo debconf apt-fast/aptmanager string apt-get | debconf-set-selections
       echo 'MIRRORS=( 'http://deb.debian.org/debian','http://ftp.debian.org/debian, http://ftp2.de.debian.org/debian, http://ftp.de.debian.org/debian, ftp://ftp.uni-kl.de/debian' )' >> /etc/apt-fast.conf
-
-  install-pipx:
-    cmds:
-    - pip install --user pipx
     
   install-utils:
     deps:
@@ -87,8 +83,17 @@ tasks:
       ./"${KREW}" install krew
       )
     - echo 'export PATH="${KREW_ROOT:-$HOME/.krew}/bin:~/.arkade/bin:$PATH"' >> ~/.bashrc
-    - export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"; /usr/local/bin/kubectl krew install stern ice df-pv ktop view-cert viewnode ssh-jump sick-pods restart resource-capacity prune-unused datree example get-all gopass htpasswd images kc ktop konfig neat nsenter popeye
-    - aria2c https://github.com/particledecay/kconf/releases/download/v2.0.0/kconf-linux-x86_64-2.0.0.tar.gz
+    - >
+      export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH";
+      /usr/local/bin/kubectl krew install
+      neat restart nsenter ssh-jump 
+      view-cert viewnode restart prune-unused
+      example get-all images snap
+      kc df-pv ktop konfig
+      sick-pods resource-capacity popeye stern ice spy pod-dive outdated deprecations view-allocations 
+      datree access-matrix who-can kubesec-scan  gopass htpasswd 
+    - aria2c https://github.com/particledecay/kconf/releases/download/v2.0.0/kconf-linux-x86_64-2.0.0.tar.gz && tar xf kconf-linux-x86_64-2.0.0.tar.gz && mv kconf /usr/local/bin
+    - aria2c https://github.com/yonahd/kor/releases/download/v0.3.2/kor_Linux_x86_64.tar.gz && tar xf kor_Linux_x86_64.tar.gz && mv kor /usr/local/bin/
 
   arkade-install-helmfile:
     deps:
@@ -147,7 +152,7 @@ tasks:
 
   python-dev:
     cmds:
-    - pipx install fastapi
+    - pip install --user pipx; pipx install fastapi
     
   github-install-starship:
     dir: /tmp
@@ -209,12 +214,11 @@ tasks:
     - task: apt-install
     - task: arkade-install-utils
     - task: arkade-install-helmfile
+    - task: python-dev
     #- task: brew-install
     - task: github-install
-    - task: install-pipx
     - task: install-gitlab-ci-local
     #- task: monitoring-utils
-    - task: python-dev
     #- task: apt-install-fpm
     - task: upx-compress
     - chmod +x /usr/local/bin/*
