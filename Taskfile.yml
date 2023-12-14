@@ -146,7 +146,7 @@ tasks:
     cmds:
     # [Annnouncing glabvars: a Python wrapper for obtaining GitLab CI variables -](https://42analytics.eu/announcing-glabvars.html)
     - pip install --user pipx
-    - pip install --user fastapi
+    #- pip install --user fastapi
     - pip install --user snimpy
     - pip install --user globalvars
       
