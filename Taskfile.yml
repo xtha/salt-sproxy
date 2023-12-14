@@ -1,7 +1,7 @@
 version: '3'
 
 vars:
-  PATH: "${KREW_ROOT:-$HOME/.krew}/bin:~/.arkade/bin:~/.local/bin/pipx:$PATH"
+  PATH: "${KREW_ROOT:-$HOME/.krew}/bin:~/.arkade/bin:~/.local/bin:$PATH"
 
 tasks:
   install-apt-fast:
