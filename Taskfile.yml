@@ -14,6 +14,14 @@ tasks:
       echo debconf apt-fast/aptmanager string apt-get | debconf-set-selections
       echo 'MIRRORS=( 'http://deb.debian.org/debian','http://ftp.debian.org/debian, http://ftp2.de.debian.org/debian, http://ftp.de.debian.org/debian, ftp://ftp.uni-kl.de/debian' )' >> /etc/apt-fast.conf
 
+  install-pipx:
+    cmds:
+    - pip install --user pipx
+
+  pip-install:
+    cmds:
+    - pipx install glabvars snimpy fastapi
+    
   install-utils:
     deps:
     - install-apt-fast
@@ -190,6 +198,7 @@ tasks:
     #- task: brew-install
     - task: github-install
     #- task: apt-install-fpm
+    - task: pip-install
     - task: upx-compress
     - chmod +x /usr/local/bin/*
     - task: clean-tmp
