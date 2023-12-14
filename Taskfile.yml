@@ -211,8 +211,8 @@ tasks:
     - task: arkade-install-helmfile
     #- task: brew-install
     - task: github-install
-    - task: install-gitlab-ci-local
     - task: install-pipx
+    - task: install-gitlab-ci-local
     #- task: monitoring-utils
     - task: python-dev
     #- task: apt-install-fpm
